@@ -15,8 +15,8 @@ function AddTodo() {
 
   return (
     <form onSubmit={addTodoHandler}>
-      <input type="text" placeholder="Add Todo" value={input} onChange={(e) => setInput(e.target.value)} />
-      <button type="submit">Add Todo</button>
+      <input className="border-2 w-full border-grey-500 p-2" type="text" placeholder="Add Todo" value={input} onChange={(e) => setInput(e.target.value)} />
+      <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded items-center hidden" type="submit">Add Todo</button>
     </form>
   )
 }

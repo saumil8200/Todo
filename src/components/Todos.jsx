@@ -18,41 +18,46 @@ function Todos() {
 
   return (
     <>
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          {editingTodoId === todo.id ? (
-            <input
-              type="text"
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
-              readOnly={false}
-            />
-          ) : (
-            <input
-              type="text"
-              value={todo.text}
-              readOnly={true}
-            />
-          )}
-          <span>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => dispatch(checkTodo(todo.id))}
-            />
-          </span>
-          <span>
-            <button onClick={() => dispatch(removeTodo(todo.id))}>X</button>
-          </span>
-          <span>
+      <div className="my-5">
+        {todos.map((todo) => (
+          <div className="flex justify-between items-center my-4" key={todo.id}>
+            <span>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => dispatch(checkTodo(todo.id))}
+                className="mr-2"
+              />
+            </span>
             {editingTodoId === todo.id ? (
-              <button onClick={() => handleUpdateTodo(todo.id)}>Save</button>
+              <input
+                type="text"
+                value={newText}
+                onChange={(e) => setNewText(e.target.value)}
+                readOnly={false}
+                className="border-2 w-full border-grey-500 p-2 mx-3"
+              />
             ) : (
-              <button onClick={() => setEditingTodoId(todo.id)}>Update</button>
+              <input
+                type="text"
+                value={todo.text}
+                readOnly={true}
+                className={`border-2 w-full border-grey-500 p-2 mx-3 ${todo.completed ? "line-through" : ""}`}
+              />
             )}
-          </span>
-        </div>
-      ))}
+            <span>
+              <button className="bg-red-500 text-white px-5 py-2 rounded-md" onClick={() => dispatch(removeTodo(todo.id))}>X</button>
+            </span>
+            <span className="mx-3">
+              {editingTodoId === todo.id ? (
+                <button className="bg-blue-500 text-white px-5 py-2 rounded-md" onClick={() => handleUpdateTodo(todo.id)}>Save</button>
+              ) : (
+                <button className="bg-blue-500 text-white px-5 py-2 rounded-md" onClick={() => setEditingTodoId(todo.id)}>Edit</button>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
